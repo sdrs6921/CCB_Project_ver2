@@ -49,7 +49,7 @@
             android:layout_height="40dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_marginBottom="35dp"
+            android:layout_marginBottom="40dp"
             android:layout_marginTop="15dp" />
         <Button
             android:id="@+id/facebook_login_button"
@@ -68,18 +68,10 @@
             android:layout_width="match_parent"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="35dp"
             android:layout_height="40dp"
             android:background="@drawable/btn_signin_google"/>
-        <Button
-            android:text="@string/signin_twitter"
-            android:textColor="@color/colorWhite"
-            android:layout_width="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_height="40dp"
-            android:layout_marginBottom="35dp"
-            android:background="@drawable/btn_signin_twitter"/>
+
     </LinearLayout>
 
 </RelativeLayout>

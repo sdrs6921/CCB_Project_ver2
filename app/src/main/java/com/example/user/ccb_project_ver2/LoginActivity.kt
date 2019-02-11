@@ -29,7 +29,9 @@ import java.util.*
 
 class LoginActivity : AppCompatActivity() {
     var auth : FirebaseAuth? = null
+
     var googleSignInClient : GoogleSignInClient? = null
+
     var GOOGLE_LOGIN_CODE = 9001
     var callbackManager : CallbackManager? = null
 
@@ -53,6 +55,7 @@ class LoginActivity : AppCompatActivity() {
                 .requestIdToken(getString(R.string.default_web_client_id))//firebase json파일에 정의되어 있음
                 .requestEmail()
                 .build()
+
         googleSignInClient = GoogleSignIn.getClient(this,gso) // google Login Class 완성
         callbackManager  = CallbackManager.Factory.create()//Facebook callback Manager 초기화
     }
@@ -76,7 +79,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun signinEmail(){
-        //로그인이 실제로 되는 로직
+        //email 로그인이 실제로 되는 로직
         auth?.signInWithEmailAndPassword(email_edittext.text.toString(),password_edittext.text.toString())?.addOnCompleteListener {
             task ->
             if(task.isSuccessful){
@@ -100,9 +103,15 @@ class LoginActivity : AppCompatActivity() {
         startActivityForResult(signInIntent,GOOGLE_LOGIN_CODE)
     }
 
+
     fun firebaseAuthWithGoogle(account: GoogleSignInAccount){
         var credential = GoogleAuthProvider.getCredential(account.idToken,null)
-        auth?.signInWithCredential(credential)
+        auth?.signInWithCredential(credential)?.addOnCompleteListener {
+            task ->
+            if(task.isSuccessful){
+                moveMainPage(auth?.currentUser)
+            }
+        }
     }
 
     fun facebookLogin(){
