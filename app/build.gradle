@@ -31,7 +31,7 @@ dependencies {
     implementation 'com.android.support:design:27.0.2'
     //Firebase 인증
     implementation 'com.google.firebase:firebase-auth:16.1.0'
-    implementation 'com.google.firebase:firebase-core:16.1.0'
+    implementation 'com.google.firebase:firebase-core:16.0.1'
     //Firebase Storage
     implementation 'com.google.firebase:firebase-storage:16.0.5'
     //Firebase FireStore
@@ -48,3 +48,4 @@ dependencies {
 }
 
 apply plugin: 'com.google.gms.google-services'
+com.google.gms.googleservices.GoogleServicesPlugin.config.disableVersionCheck = true
