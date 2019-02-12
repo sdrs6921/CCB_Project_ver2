@@ -1,8 +1,13 @@
 package com.example.user.ccb_project_ver2
 
-import android.support.v7.app.AppCompatActivity
+import android.Manifest
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
+import android.support.v4.app.ActivityCompat
+import android.support.v4.content.ContextCompat
+import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import com.example.user.ccb_project_ver2.navigation.AlarmFragment
 import com.example.user.ccb_project_ver2.navigation.DetailViewFragment
@@ -24,7 +29,9 @@ class MainActivity : AppCompatActivity() , BottomNavigationView.OnNavigationItem
                 return true
             }
             R.id.action_add_photo ->{
-
+                if(ContextCompat.checkSelfPermission(this,Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                    startActivity(Intent(this, AddPhotoActivity::class.java))
+                }
                 return true
             }
             R.id.action_favorite_alarm ->{
@@ -45,5 +52,6 @@ class MainActivity : AppCompatActivity() , BottomNavigationView.OnNavigationItem
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         bottom_navigation.setOnNavigationItemSelectedListener(this)
+        ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),1)
     }
 }
