@@ -53,5 +53,8 @@ class MainActivity : AppCompatActivity() , BottomNavigationView.OnNavigationItem
         setContentView(R.layout.activity_main)
         bottom_navigation.setOnNavigationItemSelectedListener(this)
         ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),1)
+
+        //set Default Screen
+        bottom_navigation.selectedItemId = R.id.action_home
     }
 }
