@@ -27,6 +27,7 @@ class DetailViewFragment : Fragment(){
         return view
     }
     inner class DetailViewRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+
         var contentDTOs : ArrayList<ContentDTO> = arrayListOf()
         var contentUidList : ArrayList<String> = arrayListOf()
 
@@ -54,18 +55,16 @@ class DetailViewFragment : Fragment(){
             return contentDTOs.size
         }
 
-        override fun onBindViewHolder(p0: RecyclerView.ViewHolder?, p1: Int) {
+        override fun onBindViewHolder(p0: RecyclerView.ViewHolder, p1: Int) {
             var viewholder = (p0 as CustomViewHolder).itemView
-
             //user id
             viewholder.detailview_profile_textview.text =  contentDTOs!![p1].userId
             //images
-            Glide.with(p0.itemView.context).load(contentDTOs[p1].imageUrl).into(viewholder.detailview_profile_imageview_content)
+            Glide.with(p0.itemView.context).load(contentDTOs!![p1].imageUrl).into(viewholder.detailview_imageview_content)
             //explian
-            viewholder.detailview_profile_textview.text = contentDTOs!![p1].explain
+            viewholder.detailview_explain_textview.text = contentDTOs!![p1].explain
             //like
             viewholder.detailview_item_favorite_counter.text = "Like"+contentDTOs!![p1].favoriteCount
         }
-
     }
 }

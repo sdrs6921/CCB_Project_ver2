@@ -14,6 +14,7 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -27,9 +28,9 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     //noinspection GradleCompatible
-    implementation 'com.android.support:appcompat-v7:27.0.2'
+    implementation 'com.android.support:appcompat-v7:27.1.0'
     //Design
-    implementation 'com.android.support:design:27.0.2'
+    implementation 'com.android.support:design:27.1.0'
     //Firebase 인증
     implementation 'com.google.firebase:firebase-auth:16.1.0'
     implementation 'com.google.firebase:firebase-core:16.0.1'
@@ -47,6 +48,7 @@ dependencies {
     //Facebook support
     implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
     implementation 'com.github.bumptech.glide:glide:4.8.0'
+    implementation 'com.android.support:multidex:1.0.3'
 }
 
 apply plugin: 'com.google.gms.google-services'

@@ -22,7 +22,7 @@
             android:layout_height="wrap_content" />
     </LinearLayout>
     <ImageView
-        android:id="@+id/detailview_profile_imageview_content"
+        android:id="@+id/detailview_imageview_content"
         android:scaleType="fitXY"
         android:layout_width="match_parent"
         android:layout_height="250dp" />
