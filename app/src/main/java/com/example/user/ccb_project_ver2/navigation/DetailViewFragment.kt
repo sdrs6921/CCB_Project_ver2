@@ -58,9 +58,9 @@ class DetailViewFragment : Fragment(){
         override fun onBindViewHolder(p0: RecyclerView.ViewHolder, p1: Int) {
             var viewholder = (p0 as CustomViewHolder).itemView
             //user id
-            viewholder.detailview_profile_textview.text =  contentDTOs!![p1].userId
+            viewholder.detailviewitem_profile_textview.text =  contentDTOs!![p1].userId
             //images
-            Glide.with(p0.itemView.context).load(contentDTOs!![p1].imageUrl).into(viewholder.detailview_imageview_content)
+            Glide.with(p0.itemView.context).load(contentDTOs!![p1].imageUrl).into(viewholder.detailviewitem_imageview_content)
             //explian
             viewholder.detailview_explain_textview.text = contentDTOs!![p1].explain
             //like

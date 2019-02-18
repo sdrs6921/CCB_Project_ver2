@@ -10,19 +10,19 @@
         android:layout_width="match_parent"
         android:layout_height="50dp">
         <ImageView
-            android:id="@+id/detailview_profile_img"
+            android:id="@+id/detailviewitem_profile_img"
             android:src="@mipmap/ic_launcher"
             android:layout_margin="7.5dp"
             android:layout_width="35dp"
             android:layout_height="35dp"/>
         <TextView
-            android:id="@+id/detailview_profile_textview"
+            android:id="@+id/detailviewitem_profile_textview"
             android:text="User name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
     <ImageView
-        android:id="@+id/detailview_imageview_content"
+        android:id="@+id/detailviewitem_imageview_content"
         android:scaleType="fitXY"
         android:layout_width="match_parent"
         android:layout_height="250dp" />

@@ -7,9 +7,11 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.example.user.ccb_project_ver2.navigation.model.ContentDTO
+import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.UploadTask
 import kotlinx.android.synthetic.main.activity_add_photo.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -58,13 +60,12 @@ class AddPhotoActivity : AppCompatActivity() {
         //Make File Name
         var timestamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
         var imageFileName = "IMAGE_" + timestamp + ".png"
-
         var storageRef = storage?.reference?.child("images")?.child(imageFileName)
 
         //promise method
-        storageRef?.putFile(photoUri!!)?.continueWithTask {
-            return@continueWithTask  storageRef.downloadUrl
-        }?.addOnCompleteListener { uri->
+        storageRef?.putFile(photoUri!!)?.continueWithTask { task: Task<UploadTask.TaskSnapshot> ->
+            return@continueWithTask storageRef.downloadUrl
+        }?.addOnCompleteListener { uri ->
             var contentDTO = ContentDTO()
             //download Image 삽입
             contentDTO.imageUrl = uri.toString()
@@ -82,8 +83,7 @@ class AddPhotoActivity : AppCompatActivity() {
         /*
         //callback method
         storageRef?.putFile(photoUri!!)?.addOnSuccessListener {
-            storageRef.downloadUrl.addOnSuccessListener {
-                uri ->
+            storageRef.downloadUrl.addOnSuccessListener { uri ->
                 var contentDTO = ContentDTO()
                 //download Image 삽입
                 contentDTO.imageUrl = uri.toString()
