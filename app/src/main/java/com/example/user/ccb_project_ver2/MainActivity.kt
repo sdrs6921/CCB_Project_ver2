@@ -13,6 +13,7 @@ import com.example.user.ccb_project_ver2.navigation.AlarmFragment
 import com.example.user.ccb_project_ver2.navigation.DetailViewFragment
 import com.example.user.ccb_project_ver2.navigation.GridFragment
 import com.example.user.ccb_project_ver2.navigation.UserFragment
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelectedListener {
@@ -41,6 +42,10 @@ class MainActivity : AppCompatActivity() , BottomNavigationView.OnNavigationItem
             }
             R.id.action_account ->{
                 var userFragment = UserFragment()
+                var bundle = Bundle()
+                var uid = FirebaseAuth.getInstance()?.currentUser?.uid
+                bundle.putString("destinationUid",uid)
+                userFragment.arguments = bundle
                 supportFragmentManager.beginTransaction().replace(R.id.main_content , userFragment).commit()
                 return true
             }
