@@ -16,7 +16,7 @@ import com.example.user.ccb_project_ver2.R
 import com.example.user.ccb_project_ver2.navigation.model.ContentDTO
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import  kotlinx.android.synthetic.main.fragment_user.view.*
+import kotlinx.android.synthetic.main.fragment_user.view.*
 
 class UserFragment : Fragment(){
     var fragmentView : View? = null
@@ -31,7 +31,7 @@ class UserFragment : Fragment(){
 
         fragmentView?.account_recycler_view?.adapter = UserFragmentRecyclerViewAdpater()
         fragmentView?.account_recycler_view?.layoutManager = GridLayoutManager(activity!!,3)
-        return view
+        return fragmentView
     }
     inner class UserFragmentRecyclerViewAdpater : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
         var contentDTOs : ArrayList<ContentDTO> = arrayListOf()
