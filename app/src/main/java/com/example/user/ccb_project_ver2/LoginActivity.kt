@@ -60,6 +60,11 @@ class LoginActivity : AppCompatActivity() {
         callbackManager  = CallbackManager.Factory.create()//Facebook callback Manager 초기화
     }
 
+    override fun onStart(){
+        super.onStart()
+        moveMainPage(auth?.currentUser)
+    }
+
     fun createAndroidLoginEmail(){
         //계정을 만드는 Logic
         auth?.createUserWithEmailAndPassword(email_edittext.text.toString(),password_edittext.text.toString())?.addOnCompleteListener {
