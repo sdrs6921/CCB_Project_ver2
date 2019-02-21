@@ -25,9 +25,12 @@ import kotlinx.android.synthetic.main.fragment_user.view.*
 class UserFragment : Fragment(){
     var fragmentView : View? = null
     var firestore : FirebaseFirestore? = null
-    var uid : String ?= null
+    var uid : String ?= null //내가 선택한 uid
     var auth : FirebaseAuth ?= null
-    var currentUserUid : String ?= null
+    var currentUserUid : String ?= null//현재 uid
+    companion object {
+        var PICK_PROFILE_FROM_ALBUM = 10
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         fragmentView = LayoutInflater.from(activity).inflate(R.layout.fragment_user,container,false)
@@ -58,7 +61,25 @@ class UserFragment : Fragment(){
         }
         fragmentView?.account_recycler_view?.adapter = UserFragmentRecyclerViewAdpater()
         fragmentView?.account_recycler_view?.layoutManager = GridLayoutManager(activity!!,3)
+
+        fragmentView?.account_iv_profie?.setOnClickListener {
+            var photoPickerIntent = Intent(Intent.ACTION_PICK)
+            photoPickerIntent.type =  "image/*"
+            activity?.startActivityForResult(photoPickerIntent,PICK_PROFILE_FROM_ALBUM)
+        }
+        getProfileImage()
         return fragmentView
+    }
+
+    fun getProfileImage(){
+        firestore?.collection("profileImages")?.document(uid!!)?.addSnapshotListener {documentSnapshot, firebaseFirestoreException ->
+            if(documentSnapshot == null) return@addSnapshotListener
+            if(documentSnapshot.data != null){
+                var url = documentSnapshot?.data!!["image"]
+                //Image를 Circle 타입으로 업로드
+                Glide.with(activity!!).load(url).apply(RequestOptions().circleCrop()).into(fragmentView?.account_iv_profie!!)
+            }
+        }
     }
     inner class UserFragmentRecyclerViewAdpater : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
         var contentDTOs : ArrayList<ContentDTO> = arrayListOf()
@@ -83,7 +104,6 @@ class UserFragment : Fragment(){
         }
 
         inner class CustomViewHolder(var imageView: ImageView) : RecyclerView.ViewHolder(imageView) {
-
         }
 
         override fun getItemCount(): Int {

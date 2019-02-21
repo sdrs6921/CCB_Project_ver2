@@ -13,6 +13,7 @@ import com.example.user.ccb_project_ver2.R
 import com.example.user.ccb_project_ver2.navigation.model.ContentDTO
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.fragment_detail.view.*
 import kotlinx.android.synthetic.main.item_detail.view.*
 
@@ -34,7 +35,7 @@ class DetailViewFragment : Fragment(){
         var contentUidList : ArrayList<String> = arrayListOf()
         //create constructor
         init{
-            firestore?.collection("images")?.orderBy("timestamp")?.addSnapshotListener { querySnapshot, firebaseFirestoreException ->
+            firestore?.collection("images")?.orderBy("favoriteCount",Query.Direction.DESCENDING)?.addSnapshotListener { querySnapshot, firebaseFirestoreException ->
                 contentDTOs.clear()
                 contentUidList.clear()
 
